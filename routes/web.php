@@ -11,7 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    // return view('welcome');
-    return view('tweets.index');
-});
+Route::get('/', 'TweetsController@index');
+Route::get('/login', 'UsersController@login');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
