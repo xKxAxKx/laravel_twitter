@@ -11,8 +11,7 @@
 |
 */
 
-Route::get('/', 'TweetsController@index');
-
 Auth::routes();
 
+Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
