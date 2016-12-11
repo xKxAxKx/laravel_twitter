@@ -12,7 +12,6 @@
 */
 
 Route::get('/', 'TweetsController@index');
-Route::get('/login', 'UsersController@login');
 
 Auth::routes();
 
