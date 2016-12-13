@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Register</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
+                    <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data" action="{{ url('/register') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -33,6 +33,34 @@
                                 @if ($errors->has('email'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
+                            <label for="image" class="col-md-4 control-label">Icon Image</label>
+
+                            <div class="col-md-6">
+                                <input id="image" type="file" class="form-control" name="image" value="{{ old('image') }}" required>
+
+                                @if ($errors->has('image'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('image') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('profile') ? ' has-error' : '' }}">
+                            <label for="profile" class="col-md-4 control-label">profile</label>
+
+                            <div class="col-md-6">
+                                <textarea id="profile" class="form-control" name="profile" value="{{ old('profile') }}" required></textarea>
+
+                                @if ($errors->has('profile'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('profile') }}</strong>
                                     </span>
                                 @endif
                             </div>
