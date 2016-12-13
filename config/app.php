@@ -163,6 +163,9 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+        // Intervation/Imageの追加
+        Intervention\Image\ImageServiceProvider::class,
+
         /*
          * Package Service Providers...
          */
@@ -230,6 +233,9 @@ return [
 
         // LARAVEL-DEBUGBAR
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+
+        //Intervaton/Image
+        'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 ];

@@ -13,5 +13,15 @@
 
 Auth::routes();
 
+
+//imageテスト用
+Route::get('/jpg', function(){
+
+  $image = Image::make(file_get_contents('http://goo.gl/uDTEzv'));
+
+  return $image->response('jpg');
+
+});
+
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
