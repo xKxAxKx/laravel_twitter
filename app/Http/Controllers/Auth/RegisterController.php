@@ -50,8 +50,8 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
-            // 'image' => 'image',
-            // 'profile' => 'max:255',
+            'image' => 'image',
+            'profile' => 'max:255',
             'password' => 'required|min:6|confirmed',
         ]);
     }
@@ -63,25 +63,31 @@ class RegisterController extends Controller
      * @return User
      */
     protected function create(array $data){
-        // dd($data);
 
-        // getClientOriginalName()：アップロードしたファイルのオリジナル名を取得します
-        $fileName = $data['image']->getClientOriginalName();
-
-        // getRealPath()：アップロードしたファイルのパスを取得します。
-        $image = Image::make($data['image']->getRealPath());
-
-        $path = public_path() . '/images/';
-
-        // 画像を保存する
-        $image->save($path . $fileName);
-
-        return User::create([
+        $user =  User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'image' => $data['image'],
-            'profile' => $data['profile'],
             'password' => bcrypt($data['password']),
         ]);
+
+        if(isset($data['image'])){
+            // getClientOriginalName()：アップロードしたファイルのオリジナル名を取得する
+            $fileName = $data['image']->getClientOriginalName();
+            // getRealPath()：アップロードしたファイルのパスを取得する
+            $image = Image::make($data['image']->getRealPath());
+            // 画像を保存するpathを指定する
+            $path = sprintf('images/%d/%s', $user->id, $fileName);
+            $dir = dirname(public_path($path));
+            mkdir($dir, 0777, true);
+            $image->save(public_path($path), $fileName);
+            $user->image = $path;
+        }
+
+        if(isset($data['profile'])){
+          $user->profile = $data['profile'];
+        }
+
+        $user->save();
+        return $user;
     }
 }

@@ -42,7 +42,7 @@
                             <label for="image" class="col-md-4 control-label">Icon Image</label>
 
                             <div class="col-md-6">
-                                <input id="image" type="file" class="form-control" name="image" value="{{ old('image') }}" required>
+                                <input id="image" type="file" class="form-control" name="image" value="{{ old('image') }}">
 
                                 @if ($errors->has('image'))
                                     <span class="help-block">
@@ -56,7 +56,7 @@
                             <label for="profile" class="col-md-4 control-label">profile</label>
 
                             <div class="col-md-6">
-                                <textarea id="profile" class="form-control" name="profile" value="{{ old('profile') }}" required></textarea>
+                                <textarea id="profile" class="form-control" name="profile" value="{{ old('profile') }}"></textarea>
 
                                 @if ($errors->has('profile'))
                                     <span class="help-block">
